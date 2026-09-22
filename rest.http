@@ -1,0 +1,22 @@
+@baseUrl = http://localhost:3000
+
+
+GET {{baseUrl}}/notes
+###
+POST {{baseUrl}}/notes
+Content-Type: application/json
+
+{
+    "author_id": 1,
+    "note": "test note",
+    "board": 2
+}
+###
+PUT {{baseUrl}}/notes/1
+Content-Type: application/json
+
+{
+    "author_id": 1,
+    "note": "updated note",
+    "board": 2
+}
