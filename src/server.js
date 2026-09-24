@@ -5,7 +5,7 @@ const PORT = 3000;
 
 
 // Tolkar inkommande JSON-data och lägger den i req.body
-app.use(express.json());
+app.use(express.json());  
 
 app.get('/', (req, res) => {
   res.send('Hello world');
@@ -13,6 +13,9 @@ app.get('/', (req, res) => {
 
 const notesRouter = require('./routes/notes')
 app.use('/notes', notesRouter)
+
+const boardsRouter = require('./routes/boards')
+app.use('/boards', boardsRouter)
 
 
 app.listen(PORT, () => {
