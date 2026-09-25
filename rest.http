@@ -1,11 +1,16 @@
 @baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsInVzZXJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE3OTAyNjYwMjgsImV4cCI6MTc5Mjg1ODAyOH0.8DA5YJttdUnoScQhGVtL1q6nW1LfbKy2MFcsA-jw808
 
 
 GET {{baseUrl}}/boards
+Authorization: Bearer {{token}}
+
 ###
 GET {{baseUrl}}/boards/1
+Authorization: Bearer {{token}}
 ###
 POST {{baseUrl}}/boards
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -14,6 +19,7 @@ Content-Type: application/json
 }
 ###
 PUT {{baseUrl}}/boards/1
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -22,20 +28,26 @@ Content-Type: application/json
 }
 ###
 PATCH {{baseUrl}}/boards/1
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
     "allowed_users": [1, 4, 9]
 }
 ###
-DELETE {{baseUrl}}/boards/2
+DELETE {{baseUrl}}/boards/3
+Authorization: Bearer {{token}}
 ###
 
 GET {{baseUrl}}/notes
+Authorization: Bearer {{token}}
 ###
 GET {{baseUrl}}/notes/3
+Authorization: Bearer {{token}}
 ###
+
 POST {{baseUrl}}/notes
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -44,7 +56,8 @@ Content-Type: application/json
     "board_id": 1
 }
 ###
-PUT {{baseUrl}}/notes/1 
+PUT {{baseUrl}}/notes/2
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -54,7 +67,8 @@ Content-Type: application/json
 }
 
 ###
-PATCH {{baseUrl}}/notes/3
+PATCH {{baseUrl}}/notes/2
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -64,4 +78,5 @@ Content-Type: application/json
 
 ###
 
-DELETE {{baseUrl}}/notes/2
+DELETE {{baseUrl}}/notes/3
+Authorization: Bearer {{token}}

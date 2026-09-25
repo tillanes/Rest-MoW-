@@ -2,9 +2,11 @@ const express = require('express')
 const router = express.Router()
 const { PrismaClient } = require('@prisma/client')
 
+const authorize = require('../middleware/authorization')
+
 const prisma = new PrismaClient()
 
-router.get('/', async (req, res) => {
+router.get('/', authorize, async (req, res) => {
     try {
         const notes = await prisma.notes.findMany({
             orderBy: { id: 'asc' }
@@ -16,7 +18,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id',authorize, async (req, res) => {
     const { id } = req.params
 
     try {
@@ -35,7 +37,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', authorize, async (req, res) => {
     const { author_id, note, board_id } = req.body
 
     if (!author_id || !note || !board_id) {
@@ -53,7 +55,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', authorize,async (req, res) => {
     const { id } = req.params
     const { author_id, note, board_id } = req.body
 
@@ -76,7 +78,7 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id',authorize, async (req, res) => {
     const { id } = req.params
     const { author_id, note, board_id } = req.body
 
@@ -106,7 +108,7 @@ router.patch('/:id', async (req, res) => {
     }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authorize, async (req, res) => {
     const { id } = req.params
 
     try {
