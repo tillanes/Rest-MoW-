@@ -1,4 +1,5 @@
-@baseUrl = http://localhost:3000
+#@baseUrl = http://localhost:3000
+@baseUrl = https://notes-db-5hb8.onrender.com
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsInVzZXJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE3OTAyNjYwMjgsImV4cCI6MTc5Mjg1ODAyOH0.8DA5YJttdUnoScQhGVtL1q6nW1LfbKy2MFcsA-jw808
 
 

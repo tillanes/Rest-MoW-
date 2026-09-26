@@ -3,6 +3,11 @@ const app = express();
 require('dotenv').config()
 const PORT = 3000;
 
+const cors = require('cors');
+
+app.use(cors({
+    origin: ['http://localhost:5173'],
+}));
 
 // Tolkar inkommande JSON-data och lägger den i req.body
 app.use(express.json());  
