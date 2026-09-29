@@ -28,12 +28,12 @@ Content-Type: application/json
     "allowed_users": [1, 4]
 }
 ###
-PATCH {{baseUrl}}/boards/1
+PATCH {{baseUrl}}/boards/5
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "allowed_users": [1, 4, 9]
+    "allowed_users": [6, 1, 15]
 }
 ###
 DELETE {{baseUrl}}/boards/3

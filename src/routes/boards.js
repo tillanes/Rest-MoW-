@@ -9,6 +9,7 @@ const authorize = require('../middleware/authorization')
 router.get('/', authorize, async (req, res) => {
     try {
         const boards = await prisma.boards.findMany({
+            where: { allowed_users: { has: Number(req.authUser.sub) } },
             orderBy: { id: 'asc' }
         })
         res.send(boards)
