@@ -7,7 +7,7 @@ GET {{baseUrl}}/boards
 Authorization: Bearer {{token}}
 
 ###
-GET {{baseUrl}}/boards/1
+GET {{baseUrl}}/boards/4/notes
 Authorization: Bearer {{token}}
 ###
 POST {{baseUrl}}/boards

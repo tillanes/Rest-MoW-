@@ -37,6 +37,27 @@ router.get('/:id', authorize, async (req, res) => {
     }
 })
 
+router.get('/:id/notes', authorize, async (req, res) => {
+    const { id } = req.params
+
+    try {
+        const board = await prisma.boards.findUnique({
+            where: { id: Number(id) },
+            include: { notes: { orderBy: { id: 'asc' } } }
+        })
+
+        if (!board) {
+            return res.status(404).send({ error: 'Board not found' })
+        }
+
+        res.send(board.notes)
+    } catch (err) {
+        console.error(err)
+        res.status(500).send({ error: 'Failed to fetch notes' })
+    }
+})
+
+
 router.post('/', authorize, async (req, res) => {
     const { name, allowed_users } = req.body
 
