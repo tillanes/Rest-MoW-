@@ -38,10 +38,11 @@ router.get('/:id',authorize, async (req, res) => {
 })
 
 router.post('/', authorize, async (req, res) => {
-    const { author_id, note, board_id } = req.body
+    const { note, board_id } = req.body
+    const author_id = Number(req.authUser.sub)
 
-    if (!author_id || !note || !board_id) {
-        return res.status(400).send({ error: 'author_id, note and board_id are required' })
+    if (!note || !board_id) {
+        return res.status(400).send({ error: 'note and board_id are required' })
     }
 
     try {
@@ -80,17 +81,17 @@ router.put('/:id', authorize,async (req, res) => {
 
 router.patch('/:id',authorize, async (req, res) => {
     const { id } = req.params
-    const { author_id, note, board_id } = req.body
+    const { note, board_id } = req.body
 
     const data = {}
-    if (author_id !== undefined) data.author_id = author_id
     if (note !== undefined) data.note = note
     if (board_id !== undefined) data.board_id = board_id
 
     if (Object.keys(data).length === 0) {
-        return res.status(400).send({ error: 'At least one of author_id, note or board_id is required' })
+        return res.status(400).send({ error: 'At least one of note or board_id is required' })
     }
 
+    data.author_id = Number(req.authUser.sub)
     data.updated_at = new Date()
 
     try {
