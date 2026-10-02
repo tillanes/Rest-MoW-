@@ -38,7 +38,7 @@ router.get('/:id',authorize, async (req, res) => {
 })
 
 router.post('/', authorize, async (req, res) => {
-    const { note, board_id } = req.body
+    const { note, board_id, location = { x: 50, y: 50 } } = req.body
     const author_id = Number(req.authUser.sub)
 
     if (!note || !board_id) {
@@ -47,7 +47,7 @@ router.post('/', authorize, async (req, res) => {
 
     try {
         const created = await prisma.notes.create({
-            data: { author_id, note, board_id }
+            data: { author_id, note, board_id, location }
         })
         res.status(201).send(created)
     } catch (err) {
@@ -81,18 +81,21 @@ router.put('/:id', authorize,async (req, res) => {
 
 router.patch('/:id',authorize, async (req, res) => {
     const { id } = req.params
-    const { note, board_id } = req.body
+    const { note, location } = req.body
 
     const data = {}
     if (note !== undefined) data.note = note
-    if (board_id !== undefined) data.board_id = board_id
+    if (location !== undefined) data.location = location
 
     if (Object.keys(data).length === 0) {
-        return res.status(400).send({ error: 'At least one of note or board_id is required' })
+        return res.status(400).send({ error: 'At least one of note or location is required' })
     }
 
-    data.author_id = Number(req.authUser.sub)
-    data.updated_at = new Date()
+    
+    if (note !== undefined) {
+        data.author_id = Number(req.authUser.sub)
+        data.updated_at = new Date()
+    }
 
     try {
         const updated = await prisma.notes.update({
@@ -125,5 +128,7 @@ router.delete('/:id', authorize, async (req, res) => {
         res.status(500).send({ error: 'Failed to delete note' })
     }
 })
+
+
 
 module.exports = router

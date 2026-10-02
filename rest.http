@@ -52,8 +52,19 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "note": "test note ",
+    "note": "test note 3",
     "board_id": 1
+}
+###
+
+POST {{baseUrl}}/notes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "note": "note with location",
+    "board_id": 1,
+    "location": { "x": 200, "y": 150 }
 }
 ###
 PUT {{baseUrl}}/notes/2
@@ -67,14 +78,42 @@ Content-Type: application/json
 }
 
 ###
-PATCH {{baseUrl}}/notes/2
+PATCH {{baseUrl}}/notes/11
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "note": "letsgo",
-    "board_id": 1
+    "note": "letsgo"
 }
+
+###
+
+PATCH {{baseUrl}}/notes/15
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "location": { "x": 120, "y": 340 }
+}
+
+###
+
+PATCH {{baseUrl}}/notes/18
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "note": "moved and edited",
+    "location": { "x": 50, "y": 75 }
+}
+
+###
+
+PATCH {{baseUrl}}/notes/11
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{}
 
 ###
 
